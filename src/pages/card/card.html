@@ -1,0 +1,76 @@
+<!--
+  Generated template for the CardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Score Card</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding *ngIf="course">
+  <ion-card  *ngFor="let hole of course.course.holes">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/images/golfBall.png">
+      </ion-avatar>
+      <ion-row style="text-align: center">
+        <ion-col center text-center>
+          <h2>Hole: {{hole.hole_num}}</h2>
+        </ion-col>
+        <ion-col center text-center>
+          <h2>Par: {{hole.tee_boxes[0].par}}</h2>
+        </ion-col>
+        <ion-col center text-center>
+          <h2>Yards: {{hole.tee_boxes[0].yards}}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-list>
+      <ion-row *ngFor="let player of course.players">
+        <ion-col col-6>
+          <ion-item>
+            <ion-label *ngIf="player" color="primary">{{player.name}}:</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <button color="secondary" clear small ion-button icon-only (click)="changeScore(player.name, hole.hole_num, -1 )">
+            <ion-icon name="remove"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            {{player.score[(hole.hole_num - 1)]}}
+          </ion-item>
+
+        </ion-col>
+        <ion-col>
+          <button color="secondary" clear small ion-button icon-only (click)="changeScore(player.name, hole.hole_num, -1 )">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+
+    <!--<ion-row style="text-align: center">-->
+      <!--<ion-col center>-->
+        <!--<button ion-button round color="secondary" (click)="holeMap"> Map </button>-->
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--<button ion-button round color="secondary"  (click)="saveScore"> Save </button>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+
+
+
+  </ion-card>
+
+</ion-content>
