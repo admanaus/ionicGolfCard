@@ -14,6 +14,12 @@
 
 
 <ion-content padding>
+  <ion-item *ngIf="course && weather">
+    <h1>{{course.course.name}}</h1>
+    <h2>Currently, {{weather.weather[0].description}} and {{temp}}°F</h2>
+  </ion-item>
+
+
   <ion-list *ngIf="course">
     <button ion-item *ngFor="let tee of course.course.tee_types" (click)="itemSelected($event, tee.tee_type)">
       {{ tee.tee_type }}

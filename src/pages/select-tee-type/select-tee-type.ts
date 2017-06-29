@@ -18,7 +18,8 @@ export class SelectTeeTypePage implements OnInit{
 
   courseID: any;
   course: any;
-  tees: any[];
+  weather: any;
+  temp: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,6 +31,8 @@ export class SelectTeeTypePage implements OnInit{
   ionViewDidLoad(){
     this.presentToast("Getting Selected Course...");
     this.getSpecificCourse(this.courseID);
+
+
   }
 
   itemSelected($event, teeType){
@@ -43,6 +46,8 @@ export class SelectTeeTypePage implements OnInit{
     this.getSpecificCourseService(id).subscribe(response => {
       this.course = JSON.parse(response.text());
       console.log(this.course);
+      this.getWeather();
+
       // for (let tee of this.course.course.tee_types){
       //   this.tees.push(tee)
       // }
@@ -53,7 +58,7 @@ export class SelectTeeTypePage implements OnInit{
   getSpecificCourseService(id){
     let url: string = "https://golf-courses-api.herokuapp.com/courses/" + id;
 
-    return this.http.get(url)
+    return this.http.get(url);
   }
 
   presentToast(message) {
@@ -64,5 +69,20 @@ export class SelectTeeTypePage implements OnInit{
     toast.present();
   }
 
+  getWeather(){
+    this.getWeatherService().subscribe(response => {
+      this.weather = JSON.parse(response.text());
+      this.temp = Math.floor(this.weather.main.temp);
+      console.log(this.weather);
+    })
+  }
+
+  getWeatherService(){
+    let zipcode = this.course.course.zip_code.slice(0, 5); //this trims off the sub-zipcode for passing into weather API
+    console.log(zipcode);
+    let url: string = "http://api.openweathermap.org/data/2.5/weather?zip="+ zipcode +"&units=imperial&appid=cc8ef8e5c209d938ab3801daa42b5e31";
+    console.log(url);
+    return this.http.get(url);
+  }
 
 }
