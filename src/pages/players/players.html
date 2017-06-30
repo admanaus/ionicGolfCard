@@ -17,7 +17,7 @@
   <ion-list>
     <ion-item *ngFor="let player of playersArray">
       <ion-label color="primary">Name: </ion-label>
-      <ion-input placeholder="Happy Gilmore" [(ngModel)] = player.name></ion-input>
+      <ion-input placeholder="Arnold Palmer" [(ngModel)] = player.name></ion-input>
     </ion-item>
   </ion-list>
   <button ion-button full (click)="addPlayer()"> Add Player </button>

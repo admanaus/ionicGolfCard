@@ -27,6 +27,7 @@ export class PlayersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlayersPage');
     this.course = this.navParams.data;
+    this.course.gameDate = Date();
   }
 
   addPlayer(){

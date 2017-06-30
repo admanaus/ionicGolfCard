@@ -37,13 +37,17 @@ export class CardPage {
     console.log(this.course.course.holes);
   }
 
-  changeScore(name, hole, amount){
-    this.course.players.forEach((player) => {
-      if (player.name === name) {
-        player.score[hole - 1] = player.score[hole - 1] + amount;
-      }
-    })
+  changeScore($event, index, hole, amount){
+    console.log("Index: "+ index);
+
+    this.course.players[index].score[hole - 1] = this.course.players[index].score[hole - 1] + amount;
+    this.saveToLocalStorage();
     console.log(this.course.players);
+
+  }
+
+  saveToLocalStorage(){
+    localStorage.setItem(this.course.gameID, JSON.stringify(this.course));
   }
 
 }

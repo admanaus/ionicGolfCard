@@ -34,14 +34,14 @@
     </ion-item>
 
     <ion-list>
-      <ion-row *ngFor="let player of course.players">
+      <ion-row *ngFor="let player of course.players; let index = index">
         <ion-col col-6>
           <ion-item>
             <ion-label *ngIf="player" color="primary">{{player.name}}:</ion-label>
           </ion-item>
         </ion-col>
         <ion-col>
-          <button color="secondary" clear small ion-button icon-only (click)="changeScore(player.name, hole.hole_num, -1 )">
+          <button color="secondary" clear small ion-button icon-only (click)="changeScore($event, index, hole.hole_num, -1 )">
             <ion-icon name="remove"></ion-icon>
           </button>
         </ion-col>
@@ -52,7 +52,7 @@
 
         </ion-col>
         <ion-col>
-          <button color="secondary" clear small ion-button icon-only (click)="changeScore(player.name, hole.hole_num, -1 )">
+          <button color="secondary" clear small ion-button icon-only (click)="changeScore($event, index, hole.hole_num, 1 )">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-col>

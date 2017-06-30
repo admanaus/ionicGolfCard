@@ -46,6 +46,7 @@ export class SelectTeeTypePage implements OnInit{
     this.getSpecificCourseService(id).subscribe(response => {
       this.course = JSON.parse(response.text());
       console.log(this.course);
+      this.course.gameID = Math.floor(Math.random() * 100000);
       this.getWeather();
 
       // for (let tee of this.course.course.tee_types){
