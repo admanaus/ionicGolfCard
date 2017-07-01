@@ -21,7 +21,8 @@
     </ion-item>
   </ion-list>
   <button ion-button full (click)="addPlayer()"> Add Player </button>
-  <button ion-button full (click)="savePlayers($event, players)"> Save </button>
+  <button ion-button full *ngIf="playersArray[0].name"
+          (click)="savePlayers($event, players)"> Save </button>
 </ion-content>
 
 
