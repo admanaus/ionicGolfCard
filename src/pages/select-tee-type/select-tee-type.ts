@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Http} from "@angular/http";
 import {PlayersPage} from "../players/players";
+import {DataService} from "../../assets/services/fetchData.service";
 
 /**
  * Generated class for the SelectTeeTypePage page.
@@ -24,7 +25,8 @@ export class SelectTeeTypePage implements OnInit{
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private toastCtrl: ToastController,
-              private http: Http) {
+              private http: Http,
+              private dataService: DataService) {
     this.courseID = this.navParams.data;
   }
 
@@ -71,19 +73,12 @@ export class SelectTeeTypePage implements OnInit{
   }
 
   getWeather(){
-    this.getWeatherService().subscribe(response => {
+    this.dataService.getWeatherService(this.course.course.zip_code.slice(0, 5)).subscribe(response => {
       this.weather = JSON.parse(response.text());
       this.temp = Math.floor(this.weather.main.temp);
       console.log(this.weather);
     })
   }
 
-  getWeatherService(){
-    let zipcode = this.course.course.zip_code.slice(0, 5); //this trims off the sub-zipcode for passing into weather API
-    console.log(zipcode);
-    let url: string = "http://api.openweathermap.org/data/2.5/weather?zip="+ zipcode +"&units=imperial&appid=cc8ef8e5c209d938ab3801daa42b5e31";
-    console.log(url);
-    return this.http.get(url);
-  }
 
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Http} from "@angular/http";
 import {SelectTeeTypePage} from "../select-tee-type/select-tee-type";
+import {DataService} from "../../assets/services/fetchData.service";
 
 /**
  * Generated class for the NewGamePage page.
@@ -25,7 +26,8 @@ export class NewGamePage implements OnInit{
               public navParams: NavParams,
               private toastCtrl: ToastController,
               private http: Http,
-              private loadingController: LoadingController
+              private loadingController: LoadingController,
+              private dataService: DataService
               ) {}
 
 
@@ -85,20 +87,9 @@ export class NewGamePage implements OnInit{
     })
   }
 
-  getNearbyCoursesService(lat, long) { // lat and long are pulled from user's current geolocation
-    let url: string = "http://golf-courses-api.herokuapp.com/courses/";
-    let body: object = {
-      "latitude": lat,
-      "longitude": long,
-      "radius": 50 // in kilometers
-    };
-
-    return this.http.post(url, body)
-
-  }
 
   getNearbyCourses(){
-    this.getNearbyCoursesService(this.userLat, this.userLong)
+    this.dataService.getNearbyCoursesService(this.userLat, this.userLong)
       .subscribe(response => {
         this.nearbyCourses = JSON.parse(response.text());
       })

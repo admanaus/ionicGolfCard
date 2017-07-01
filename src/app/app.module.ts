@@ -14,6 +14,7 @@ import {SelectTeeTypePage} from "../pages/select-tee-type/select-tee-type";
 import {PlayersPage} from "../pages/players/players";
 import {CardPage} from "../pages/card/card";
 import {LoadGamePage} from "../pages/load-game/load-game";
+import {DataService} from "../assets/services/fetchData.service";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {LoadGamePage} from "../pages/load-game/load-game";
   ],
   providers: [
     StatusBar,
+    DataService,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -14,9 +14,15 @@
 
 
 <ion-content padding>
+
+  <ion-item *ngIf="noGamesFound">
+    <h1>No saved games...</h1>
+  </ion-item>
+
   <ion-list *ngIf="savedGames">
     <button ion-item *ngFor="let game of savedGames" (click)="itemSelected($event, game)">
-      {{game.course.name}} - {{game.gameDate}}
+      {{game.course.name}} - {{game.gameDate | date}}
     </button>
   </ion-list>
+  <button ion-button full (click)="goToNewGame()"> New Game </button>
 </ion-content>
